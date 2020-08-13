@@ -6,9 +6,7 @@
     <groupId>alliance</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-    <groupId>alliance</groupId>
     <artifactId>learning-crc-st</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <build>
         <plugins>
@@ -56,7 +54,7 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
     </properties>
 </project>
