@@ -1,4 +1,4 @@
-package alliance.service.ping.boundary;
+package ptsi.service.ping.boundary;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

@@ -1,4 +1,4 @@
-package alliance.service.configurations;
+package ptsi.service.configurations;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
