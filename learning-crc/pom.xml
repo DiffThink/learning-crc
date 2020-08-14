@@ -4,7 +4,7 @@
     <parent>
     <artifactId>learning-crc-service</artifactId>
     <groupId>alliance</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
     <groupId>alliance</groupId>
     <artifactId>learning-crc</artifactId>
