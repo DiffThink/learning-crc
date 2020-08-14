@@ -1,0 +1,2 @@
+alliance\service\configurations\JAXRSConfiguration.class
+alliance\service\ping\boundary\PingResource.class
