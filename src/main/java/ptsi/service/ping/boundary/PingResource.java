@@ -12,6 +12,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @Path("ping")
 public class PingResource {
 
+    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @ConfigProperty(name = "message")
     String message;    
