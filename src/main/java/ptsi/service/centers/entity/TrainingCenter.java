@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2019, electrical training ALLIANCE
- * All rights reserved.
+ * Copyright (c) 2020, ProTech Skills Institute, All rights reserved.
  *  
  * Redistribution and use in source and binary forms, with or without
  * modification, are prohibited:
@@ -17,76 +16,53 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+
 package ptsi.service.centers.entity;
 
 import java.io.Serializable;
 
+import javax.json.bind.annotation.JsonbVisibility;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Version;
+import javax.persistence.Table;
+
+import ptsi.service.configurations.PrivateVisibilityStrategy;
 
 /**
  *
- * @author Stephen W. Boyd <sboyd@electricaltrainingalliance.org>
+ * @author Stephen W. Boyd <sboyd@protechskillsinstitute.org>
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = TrainingCenter.findByProgramCode, query = "SELECT t FROM TrainingCenter t WHERE t.programCode = :code"),
-        @NamedQuery(name = TrainingCenter.findAll, query = "SELECT t FROM TrainingCenter t") })
+@Table(name = "training_centers")
+@NamedQuery(name = TrainingCenter.findAll, query = "SELECT c FROM TrainingCenter c")
+@JsonbVisibility(PrivateVisibilityStrategy.class)
 public class TrainingCenter implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 9197911968578298904L;
 	public static final String PREFIX = "centers.entity.TrainingCenter.";
-    public static final String findByProgramCode = PREFIX + "findByProgramCode";
     public static final String findAll = PREFIX + "findAll";
+	
 
-    /**
-     * Optimistic Lock Field for Version Control
-     */
-    @Version
-    @Column(name = "OptLock", columnDefinition = "bigint DEFAULT 0", nullable = false)
-    private long version = 0L;
+	@Id
+	@Column(name = "program_code")
+	private String programCode;
 
-    /**
-     * PK: Id of the Object
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+	@Column(name = "program_name", length = 255, nullable = false)
+	private String programName;
 
-    private String programCode;
-    private String officialName;
-    private String friendlyName;
-    private boolean isVisible;
-    private boolean isActive;
+	public String getProgramCode() {
+		return programCode;
+	}
 
-    public TrainingCenter(String programCode, String officialName, String friendlyName, boolean isVisible,
-            boolean isActive) {
-        this.programCode = programCode;
-        this.officialName = officialName;
-        this.friendlyName = friendlyName;
-        this.isVisible = isVisible;
-        this.isActive = isActive;
-    }
+	public void setProgramCode(String programCode) {
+		this.programCode = programCode;
+	}
+	
+	
 
-    public TrainingCenter() {
-        this.isActive = false;
-        this.isVisible = false;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return id;
-    }
 }
