@@ -81,6 +81,12 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.11.2.Final-redhat-00002</version>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
