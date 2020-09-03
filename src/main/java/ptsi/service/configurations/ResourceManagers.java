@@ -8,9 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 public class ResourceManagers {
-	
+
     @Produces
-    @PersistenceContext
+    @PersistenceContext(name = "servicePU")
     private EntityManager em;
 
     @Produces
