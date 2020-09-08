@@ -1,0 +1,97 @@
+Red Hat Notes
+===============
+
+Author Parris Lucas <Parris@RedHat.com>
+
+v1.0, September 2020: Initial release
+
+:showtitlepage:
+:notitle:
+:noheader:
+:nofooter:
+
+== Introduction
+
+Identifying several useful ways to install, configure and develop with PostgreSQL
+
+== Background
+
+== Theory
+The documentation, instructions and demos not developed for all audiences. The Professional (SMB) and Commercial (Mid-Market) developer community User eXperience is not currently addressed with the current Customer Portal experience.
+
+
+#### Resource List
+
+File Modifications
+
+- src\main\webapp\WEB-INF\hibernate5-quickstart-ds.xml
+
+Useful Commands
+
+- `oc port-forward postgresql-1-4c5n8 5432:5432`
+
+
+== Materials and apparatus
+
+
+## JBoss EAP Templates
+
+Identifying the correct templates for EAP ^7.3, PostgreSQL ^12.x and OpenShift ^4.3
+
+
+## JBOSS EAP Deployment
+
+
+
+
+
+
+oc new-app --template=eap73-openjdk11-third-party-db-s2i.json  `
+ -p IMAGE_STREAM_NAMESPACE=eap-demo-02 `
+ -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
+ -p SOURCE_REPOSITORY_REF=EAP_7.3.0.GA `
+ -p GALLEON_PROVISION_LAYERS=standalone `
+ -p CONTEXT_DIR=hibernate
+
+
+## PostgreSQL DataSource & Driver
+
+The [JBOSS EAP 7.3.0.GA Quickstart] provide a good example to use to configure Hibernate|JPA. This provided the core information to determine some of the challenges around the driver and datasource.
+
+### Red Hat JBoss Enterprise Application Platform (JBoss EAP) Quickstarts
+
+[[optional_components]]
+== Configure Optional Components
+
+The following components are needed for only a small subset of the quickstarts. Do not install or configure them unless the quickstart requires it.
+
+* xref:create_quickstart_users[Create Quickstart Users]
+* xref:configure_postgresql[Configure the PostgreSQL Database]
+* xref:configure_byteman[Configure Byteman]
+
+[[create_quickstart_users]]
+=== Create Quickstart Users
+
+Some of the quickstarts, particularly those that run in a secured mode and demonstrate security, require that you create quickstart users with different roles for authorization purposes. See https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CREATE_USERS.adoc#create_users_required_by_the_quickstarts[Create Users Required by the Quickstarts] for detailed instructions to create users required by the quickstarts.
+
+[[configure_postgresql]]
+=== Configure the PostgreSQL Database
+
+Some of the quickstarts that demonstrate transactions require that you install and configure the PostgreSQL database. See https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure_the_postgresql_database_for_use_with_the_quickstarts[Configure the PostgreSQL Database for Use with the Quickstarts] for instructions.
+
+
+== Procedure
+
+== Workplan
+
+== Results
+
+
+
+
+
+== Discussion
+
+== Conclusion
+
+== Recommendations
