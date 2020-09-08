@@ -1,9 +1,15 @@
 include::../shared-doc/attributes.adoc[]
 
+[link=https://gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge] 
+image::https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA.svg[Gitter,80] 
+
 = hibernate: How to Use Hibernate 5 in an Application
 :author: Madhumita Sadhukhan
 :level: Intermediate
 :technologies: Hibernate
+
+
+
 
 [abstract]
 The `hibernate` quickstart demonstrates how to use Hibernate ORM 5 API over JPA, using Hibernate-Core and Hibernate Bean Validation, and EJB.
