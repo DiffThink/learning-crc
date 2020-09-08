@@ -5,6 +5,8 @@
 :Created: 2020-09-08
 :Status: Initial release
 
+[![Gitter](https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA.svg)](https://gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 = Introduction
 
 Identifying several useful ways to install, configure and develop with PostgreSQL
@@ -33,7 +35,6 @@ Useful Commands
 
 - https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#import_command_for_jdk_11_imagestreams[Import command for JDK 11 imagestreams]
 -
-
 
 Sources
 
@@ -91,6 +92,14 @@ Used standalone for my testing, yet should be able to use `jpa` or `cloud-profil
 ## PostgreSQL DataSource & Driver
 
 The [JBOSS EAP 7.3.0.GA Quickstart] provide a good example to use to configure Hibernate|JPA. This provided the core information to determine some of the challenges around the driver and datasource.
+
+
+### JBOSS EAP Configurations
+
+
+image::resources\images\Annotation2020-09-08-162952.png[Standalone-Full.xml Driver Changes]
+
+
 
 ### Red Hat JBoss Enterprise Application Platform (JBoss EAP) Quickstarts
 
