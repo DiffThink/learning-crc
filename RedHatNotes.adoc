@@ -25,27 +25,47 @@ Useful Commands
 
 - `oc port-forward postgresql-1-4c5n8 5432:5432`
 
-
 == Materials and apparatus
+
+=== Documentaton
+
+2.4. Import the Latest JBoss EAP for OpenShift Imagestreams and Templates
+
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#import_command_for_jdk_11_imagestreams[Import command for JDK 11 imagestreams]
+-
+
+
+Sources
+
+- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack[]
+- https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure_the_postgresql_database_for_use_with_the_quickstarts[Configure the PostgreSQL Database]
+* https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#add-the-postgresql-module-to-the-jboss-eap[Add the PostgreSQL Module to the JBoss EAP]
+* https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure-the-postgresql-driver-in-the-jboss-eap-server[Configure the PostgreSQL Driver in the JBoss EAP Server]
+
+Downloads
+
+- http://jdbc.postgresql.org/download.html[PostgreSQLJBDC Drivers]
+* https://jdbc.postgresql.org/download/postgresql-42.2.16.jar[PostgreSQL JDBC 4.2 Driver, 42.2.16]
 
 
 === JBoss EAP Templates
 
 Identifying the correct templates for EAP ^7.3, PostgreSQL ^12.x and OpenShift ^4.3
 
+.\oc new-project eap-demo.ps1[Installed the following templates for EAP 7.3]
 
 === JBOSS EAP Deployment
 
-
-
 [eap73-openjdk11-example]
 ====
+```! powershell
 oc new-app --template=eap73-openjdk11-third-party-db-s2i.json  `
  -p IMAGE_STREAM_NAMESPACE=eap-demo-02 `
  -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
  -p SOURCE_REPOSITORY_REF=EAP_7.3.0.GA `
  -p GALLEON_PROVISION_LAYERS=standalone `
  -p CONTEXT_DIR=hibernate
+ ```
 ====
 
 . --template
