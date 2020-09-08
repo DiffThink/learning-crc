@@ -1,5 +1,4 @@
-Red Hat Notes
-===============
+= Red Hat Notes
 
 :Author:  Parris Lucas <Parris@RedHat.com>
 :Version: v1.0
