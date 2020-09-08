@@ -4,7 +4,7 @@ include::../shared-doc/attributes.adoc[]
 :author: Madhumita Sadhukhan
 :level: Intermediate
 :technologies: Hibernate
-[![Gitter](https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA.svg)](https://gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 [abstract]
 The `hibernate` quickstart demonstrates how to use Hibernate ORM 5 API over JPA, using Hibernate-Core and Hibernate Bean Validation, and EJB.
 

@@ -5,7 +5,9 @@
 :Created: 2020-09-08
 :Status: Initial release
 
-[![Gitter](https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA.svg)](https://gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[link=https://gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge] 
+image::https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA.svg[Gitter,100] 
+
 
 = Introduction
 
