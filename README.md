@@ -1,2 +1,0 @@
-# learning-crc
-Learning CRC
