@@ -135,7 +135,7 @@ $OC_PROJECT_REPOSITORY_URL = "https://github.com/DiffThink/learning-crc"
 $OC_PROJECT_REPOSITORY_BRANCH = "feature/osd-eap-hibernate" 
 $OC_PROJECT_REPOSITORY_DIRECTORY = ""
 $OC_PROJECT_REPOSTORY_TEMPLATE = "eap73-openjdk11-third-party-db-s2i"
-$OC_PROJECT_REPOSITORY_GALLEON_PROVISION = "standalone-full"
+$OC_PROJECT_REPOSITORY_GALLEON_PROVISION = "standalone"
 
 oc -n $OC_EAP_PROJECT new-app  `
     --template=$OC_PROJECT_REPOSTORY_TEMPLATE `
