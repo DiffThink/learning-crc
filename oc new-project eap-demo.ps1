@@ -80,49 +80,52 @@ oc -n $OC_EAP_PROJECT import-image registry.redhat.io/rhel8/postgresql-12 --conf
 <# An example Red Hat JBoss EAP 7 application. For more information about using this template, 
 see https://github.com/jboss-container-images/jboss-eap-7-openshift-image/blob/eap72/README.adoc #>
 
-$OC_PROJECT_APPLICATION_NAME = "eap73-openjdk11-basic-s2i"
+<# commented out to prevent running
+# Install JBOSS EAP Quickstart with specific tag
+# Powershell continue next line is "`" and replaced bash "\"
+#>
+
+$OC_PROJECT_APPLICATION_NAME = "test"
 
 $OC_PROJECT_REPOSITORY_URL = "https://github.com/jboss-developer/jboss-eap-quickstarts"
 $OC_PROJECT_REPOSITORY_BRANCH = "7.3.x-openshift" 
 $OC_PROJECT_REPOSITORY_DIRECTORY = "helloworld"
+$OC_PROJECT_REPOSTORY_TEMPLATE = "eap73-openjdk11-basic-s2i"
 $OC_PROJECT_REPOSITORY_GALLEON_PROVISION = ""
 
-oc -n $OC_EAP_PROJECT new-app $OC_PROJECT_APPLICATION_NAME `
+#region JBOSS EAP Quickstart Helloworld Text
+
+# Install helloworld
+$OC_PROJECT_REPOSITORY_DIRECTORY = "helloworld"
+oc -n $OC_EAP_PROJECT new-app  `
+    --template=$OC_PROJECT_REPOSTORY_TEMPLATE `
     -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
-    -p APPLICATION_NAME=$OC_EAP_PROJECT-$OC_PROJECT_REPOSITORY_DIRECTORY `
+    -p APPLICATION_NAME=$OC_PROJECT_APPLICATION_NAME-$OC_PROJECT_REPOSITORY_DIRECTORY `
     -p SOURCE_REPOSITORY_URL=$OC_PROJECT_REPOSITORY_URL `
     -p SOURCE_REPOSITORY_REF=$OC_PROJECT_REPOSITORY_BRANCH `
     -p CONTEXT_DIR=$OC_PROJECT_REPOSITORY_DIRECTORY `
     -p GALLEON_PROVISION_LAYERS=$OC_PROJECT_REPOSITORY_GALLEON_PROVISION
-    
-
-<# commented out to prevent running
-# Install basic EAP 7.x, openJDK 11 S2I on to OpenShift
-
-oc -n $OC_EAP_PROJECT new-app eap73-openjdk11-basic-s2i `
-    -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
-    -p APPLICATION_NAME=eap73-basic-app
-    -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
-    -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
-    -p GALLEON_PROVISION_LAYERS='' `
-    -p CONTEXT_DIR=hellworld `
-    
- #>
+#endregion
 
 #region JBOSS EAP Quickstart Helloworld HTML5
 
-<# commented out to prevent running
-# Install JBOSS EAP Quickstar Hello World HTML5 with specific tag
-# Powershell continue next line is "`" and replaced bash "\"
+# Install helloworld-html5
+$OC_PROJECT_REPOSITORY_DIRECTORY = "helloworld-html5"
+$OC_PROJECT_REPOSITORY_GALLEON_PROVISION = "jaxrs-server"
 
-oc new-app --template=eap73-openjdk11-basic-s2i `
+oc -n $OC_EAP_PROJECT new-app  `
+    --template=$OC_PROJECT_REPOSTORY_TEMPLATE `
     -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
-    -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
+    -p APPLICATION_NAME=$OC_PROJECT_APPLICATION_NAME-$OC_PROJECT_REPOSITORY_DIRECTORY `
+    -p SOURCE_REPOSITORY_URL=$OC_PROJECT_REPOSITORY_URL `
+    -p SOURCE_REPOSITORY_REF=$OC_PROJECT_REPOSITORY_BRANCH `
+    -p CONTEXT_DIR=$OC_PROJECT_REPOSITORY_DIRECTORY `
+    -p GALLEON_PROVISION_LAYERS=$OC_PROJECT_REPOSITORY_GALLEON_PROVISION
+
     -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
-    -p GALLEON_PROVISION_LAYERS=jaxrs-server `
+    -p GALLEON_PROVISION_LAYERS= `
     -p CONTEXT_DIR=helloworld-html5
  
- #>
 #endregion
  
 #region JBOSS EAP Quickstart Hibernate 
