@@ -29,6 +29,13 @@ Useful Commands
 
 - `oc port-forward postgresql-1-4c5n8 5432:5432`
 
+
+Registry Catalog
+
+- https://access.redhat.com/containers/?count=50&sort=push_date%20desc#/category/Standalone%20Image[Red Hat Application Images]
+- https://access.redhat.com/containers/?count=50&sort=push_date%20desc#/category/Programming%2520Languages%2520%2526%2520Runtimes[Programming Languages & Runtimes]
+
+
 == Materials and apparatus
 
 === Documentaton
@@ -37,6 +44,7 @@ Useful Commands
 
 - https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#import_command_for_jdk_11_imagestreams[Import command for JDK 11 imagestreams]
 -
+
 
 Sources
 
