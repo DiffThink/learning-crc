@@ -121,26 +121,29 @@ oc -n $OC_EAP_PROJECT new-app  `
     -p SOURCE_REPOSITORY_REF=$OC_PROJECT_REPOSITORY_BRANCH `
     -p CONTEXT_DIR=$OC_PROJECT_REPOSITORY_DIRECTORY `
     -p GALLEON_PROVISION_LAYERS=$OC_PROJECT_REPOSITORY_GALLEON_PROVISION
-
-    -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
-    -p GALLEON_PROVISION_LAYERS= `
-    -p CONTEXT_DIR=helloworld-html5
- 
 #endregion
  
 #region JBOSS EAP Quickstart Hibernate 
 
- <# commented out to prevent running
+<# commented out to prevent running
 # Install JBOSS EAP Quickstart Hibernate with specific tag
 # Powershell continue next line is "`" and replaced bash "\"
+#>
 
-oc new-app --template=eap73-openjdk11-basic-s2i `
- -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
- -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
- -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
- -p GALLEON_PROVISION_LAYERS=jaxrs-server `
- -p CONTEXT_DIR=helloworld-html5
- 
- #>
+# Install Hibernate
+$OC_PROJECT_REPOSITORY_URL = "https://github.com/DiffThink/learning-crc"
+$OC_PROJECT_REPOSITORY_BRANCH = "feature/osd-eap-hibernate" 
+$OC_PROJECT_REPOSITORY_DIRECTORY = ""
+$OC_PROJECT_REPOSTORY_TEMPLATE = "eap73-openjdk11-third-party-db-s2i"
+$OC_PROJECT_REPOSITORY_GALLEON_PROVISION = "standalone-full"
+
+oc -n $OC_EAP_PROJECT new-app  `
+    --template=$OC_PROJECT_REPOSTORY_TEMPLATE `
+    -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
+    -p APPLICATION_NAME=$OC_PROJECT_APPLICATION_NAME-$OC_PROJECT_REPOSITORY_DIRECTORY `
+    -p SOURCE_REPOSITORY_URL=$OC_PROJECT_REPOSITORY_URL `
+    -p SOURCE_REPOSITORY_REF=$OC_PROJECT_REPOSITORY_BRANCH `
+    -p CONTEXT_DIR=$OC_PROJECT_REPOSITORY_DIRECTORY `
+    -p GALLEON_PROVISION_LAYERS=$OC_PROJECT_REPOSITORY_GALLEON_PROVISION
 
 #endregion
