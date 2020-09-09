@@ -1,16 +1,16 @@
-<# 
+<# Information
     Deploys the following to OpenShift
 
         1. Project
         2. Applictaion
         3. Add Templates
  #>
-
+        
 #region Login into Hub.Docker.com, Quay.io, and Registry.RedHat.io
 
-docker login -u="plucas-redhat-com+parris_redhat_com" quay.io
-docker login --username parris4redhat #hub.docker.io
-docker login registry.access.redhat.com
+# Login with existing credentials 
+docker login
+docker login quay.io
 docker login registry.redhat.io 
 #endregion
 
@@ -21,7 +21,6 @@ $OC_CURRENT_CLUSTER_TOKEN = $(oc whoami -t)
 $OC_CURRENT_CLUSTER_CONTEXT = $(oc config current-context)
 #endregion
 
-
 #region Local Environment Variables
 
 $Env:PATH = "C:\Users\Developer\.crc\bin\oc;$Env:PATH"
@@ -29,21 +28,30 @@ $CRC_PATH = "D:\Developer\CRC\"
 $EAP_HOME   = "D:\volume\sandbox\jboss-eap-7.3\"
 $EAP7_HOME  = "D:\volume\sandbox\jboss-eap-7.3\bin\"
 $JBOSS_HOME  = "D:\volume\sandbox\jboss-eap-7.3\"
+$OC_EAP_GUID = (New-Guid).ToString().Substring(0,8)
 #endregion
+
+$OC_EAP_PROJECT = "dev-eap-$($OC_EAP_GUID)"    # Dirty Random Generator
+
+# https://github.com/jboss-container-images/jboss-eap-7-openshift-image/branches
+$JBOSS_EAP_IMAGE_DIRECTORY = "7.3.x"  # Tags eap72-openjdk11-ubi8-dev, eap-cd-dev, eap-cd
 
 #region OpenShift Deployment Variables
 $OC_SECRET_PATH = "$($CRC_PATH).\secrets\"
-$OC_EAP_PROJECT = "eap-demo-03"
-$JBOSS_EAP_IMAGE_DIRECTORY = "eap73-openjdk11"
 $JBOSS_EAP_IMAGE_URL = "https://raw.githubusercontent.com/jboss-container-images/jboss-eap-7-openshift-image/$($JBOSS_EAP_IMAGE_DIRECTORY)/templates/"
 #endregion
 
 oc new-project $OC_EAP_PROJECT
 
-#region Adding registry.redhat.io secret
+#region Registry & SSL/TLS
+# Adding registry.redhat.io secret
+oc create -f "$($OC_SECRET_PATH)12666202_idm-odo-sa-secret.yaml" -n $OC_EAP_PROJECT
+oc create -f "$($OC_SECRET_PATH)12666202_parris-redhat-com-secret.yaml" -n $OC_EAP_PROJECT
 
-oc create -f "$($OC_SECRET_PATH)12666202_idm-odo-sa-secret.yaml" --namespace=$OC_EAP_PROJECT
-oc create -f "$($OC_SECRET_PATH)12666202_parris-redhat-com-secret.yaml" --namespace=$OC_EAP_PROJECT
+# project development certificates SSL/TLS
+oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/eap-app-secret.json
+oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/eap7-app-secret.json
+oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/sso-app-secret.json
 #endregion
 
 #region Add missing templates jboss-eap-7-openshift-image/eap73-openjdk11
@@ -72,11 +80,37 @@ oc -n $OC_EAP_PROJECT import-image registry.redhat.io/rhel8/postgresql-12 --conf
 <# An example Red Hat JBoss EAP 7 application. For more information about using this template, 
 see https://github.com/jboss-container-images/jboss-eap-7-openshift-image/blob/eap72/README.adoc #>
 
+$OC_PROJECT_APPLICATION_NAME = "eap73-openjdk11-basic-s2i"
+
+$OC_PROJECT_REPOSITORY_URL = "https://github.com/jboss-developer/jboss-eap-quickstarts"
+$OC_PROJECT_REPOSITORY_BRANCH = "7.3.x-openshift" 
+$OC_PROJECT_REPOSITORY_DIRECTORY = "helloworld"
+$OC_PROJECT_REPOSITORY_GALLEON_PROVISION = ""
+
+oc -n $OC_EAP_PROJECT `
+    new-app $OC_PROJECT_APPLICATION_NAME `
+    
+    -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
+    -p APPLICATION_NAME=$OC_PROJECT_APPLICATION_NAME-$OC_PROJECT_REPOSITORY_DIRECTORY `
+    `
+    -p SOURCE_REPOSITORY_URL=$OC_PROJECT_REPOSITORY_URL `
+    -p SOURCE_REPOSITORY_REF=$OC_PROJECT_REPOSITORY_BRANCH `
+    -p CONTEXT_DIR=$OC_PROJECT_REPOSITORY_DIRECTORY `
+    `
+    -p GALLEON_PROVISION_LAYERS=$OC_PROJECT_REPOSITORY_GALLEON_PROVISION
+    
+
 <# commented out to prevent running
 # Install basic EAP 7.x, openJDK 11 S2I on to OpenShift
 
-oc -n $OC_EAP_PROJECT new-app eap73-openjdk11-basic-s2i -p APPLICATION_NAME=eap73-basic-app
-
+oc -n $OC_EAP_PROJECT new-app eap73-openjdk11-basic-s2i `
+    -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
+    -p APPLICATION_NAME=eap73-basic-app
+    -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
+    -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
+    -p GALLEON_PROVISION_LAYERS='' `
+    -p CONTEXT_DIR=hellworld `
+    
  #>
 
 #region JBOSS EAP Quickstart Helloworld HTML5
@@ -86,11 +120,11 @@ oc -n $OC_EAP_PROJECT new-app eap73-openjdk11-basic-s2i -p APPLICATION_NAME=eap7
 # Powershell continue next line is "`" and replaced bash "\"
 
 oc new-app --template=eap73-openjdk11-basic-s2i `
- -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
- -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
- -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
- -p GALLEON_PROVISION_LAYERS=jaxrs-server `
- -p CONTEXT_DIR=helloworld-html5
+    -p IMAGE_STREAM_NAMESPACE=$OC_EAP_PROJECT `
+    -p SOURCE_REPOSITORY_URL=https://github.com/jboss-developer/jboss-eap-quickstarts `
+    -p SOURCE_REPOSITORY_REF=7.3.x-openshift `
+    -p GALLEON_PROVISION_LAYERS=jaxrs-server `
+    -p CONTEXT_DIR=helloworld-html5
  
  #>
 #endregion
