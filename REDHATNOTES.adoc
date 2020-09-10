@@ -74,17 +74,23 @@ Registry Catalog
 -
 
 
-Sources
+**Sources**
 
-- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack[]
+_Need vetting_
+
+- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack[Wildfly Datasource Galleon Pack]
 - https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure_the_postgresql_database_for_use_with_the_quickstarts[Configure the PostgreSQL Database]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#add-the-postgresql-module-to-the-jboss-eap[Add the PostgreSQL Module to the JBoss EAP]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure-the-postgresql-driver-in-the-jboss-eap-server[Configure the PostgreSQL Driver in the JBoss EAP Server]
 
+**Red Hat Customer Portal**
 
 - https://access.redhat.com/articles/2026253[Red Hat JBoss Enterprise Application Platform (EAP) 7 Supported Configurations]
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/7.3.0_release_notes/index#supported_configurations[7.3.0 Release Notes |Chapter 2. Supported Configurations]
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#creating-a-configmap-from-standalone-xml-file_default[Getting Started With Jboss Eap For Openshift Container Platform|8.3.3. Creating a ConfigMap from a standalone.xml File]
 
-Downloads
+
+**Downloads**
 
 - http://jdbc.postgresql.org/download.html[PostgreSQLJBDC Drivers]
 * https://jdbc.postgresql.org/download/postgresql-42.2.16.jar[PostgreSQL JDBC 4.2 Driver, 42.2.16]
@@ -195,6 +201,10 @@ Initial learn to all approaches using the OC | ODO client tools, and then follow
 - Master
 
 
+
+**To-Do**
+
+- [ ] Compare https://github.com/jboss-container-images/jboss-eap-7-openshift-image/tree/7.2.x/templates[7.2.x] with https://github.com/jboss-container-images/jboss-eap-7-openshift-image/tree/7.3.x/templates[7.3.x] templates
 
 = Results
 
