@@ -166,14 +166,34 @@ Some of the quickstarts that demonstrate transactions require that you install a
 
 = Procedure
 
-= Workplan
-
 Journal every step of the way to document for Application Service BU, Marketing & Technology Operations, and related teams the challenges of engaging with Professional and Commerical Open Source contributors.
 
 The current steps are documented in the
 
 - Red Hat Notes
 - https://github.com/DiffThink/learning-crc/blob/feature/osd-eap-hibernate/oc%20new-project%20eap-demo.ps1[OpenShift New JBoss EAP Hibernate|JNDI|JPA Demonstration Journal]
+
+= Workplan
+
+**JBoss EAP Hibernate | JNDI | JPA**
+
+Initial learn to all approaches using the OC | ODO client tools, and then followed functional testing using web console exclusively  (_**no** client tools_)
+
+- Learn
+. Identify several approaches to configure hibernate for OpenShift 4.x
+** [ ] Build Configuration Approach
+** [ ] Deployment Configuration Approach
+** [ ] S2I Artifact Deployment Approach
+** [ ] Runtime Artifact Deployment Approach
+** [ ] Manual Configuration Deployment Approach
+. Identify the lessons learned from each approach
+. Test, Test, Test
+** [ ] Integration Test
+** [ ] Functional Test
+** [ ] _Grandmother_ Test 
+- Practice
+- Master
+
 
 
 = Results
