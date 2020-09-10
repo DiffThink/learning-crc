@@ -1,0 +1,556 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "description": "The web server's http port."
+                },
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app"
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "deploymentConfig": "eap-app"
+                }
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "description": "The web server's https port."
+                },
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "secure-eap-app"
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "port": 8443,
+                        "targetPort": 8443
+                    }
+                ],
+                "selector": {
+                    "deploymentConfig": "eap-app"
+                }
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "description": "The JGroups ping port for clustering.",
+                    "service.alpha.kubernetes.io/tolerate-unready-endpoints": "true"
+                },
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app-ping"
+            },
+            "spec": {
+                "clusterIP": "None",
+                "ports": [
+                    {
+                        "name": "ping",
+                        "port": 8888
+                    }
+                ],
+                "publishNotReadyAddresses": true,
+                "selector": {
+                    "deploymentConfig": "eap-app"
+                }
+            }
+        },
+        {
+            "apiVersion": "route.openshift.io/v1",
+            "id": "eap-app-http",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "description": "Route for application's http service."
+                },
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app"
+            },
+            "spec": {
+                "to": {
+                    "name": "eap-app"
+                }
+            }
+        },
+        {
+            "apiVersion": "route.openshift.io/v1",
+            "id": "eap-app-https",
+            "kind": "Route",
+            "metadata": {
+                "annotations": {
+                    "description": "Route for application's https service."
+                },
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "secure-eap-app"
+            },
+            "spec": {
+                "host": "",
+                "tls": {
+                    "termination": "passthrough"
+                },
+                "to": {
+                    "name": "secure-eap-app"
+                }
+            }
+        },
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app"
+            }
+        },
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app-build-artifacts"
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app-build-artifacts"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "eap-app-build-artifacts:latest"
+                    }
+                },
+                "source": {
+                    "contextDir": "datavirt/hibernate-webapp",
+                    "git": {
+                        "ref": "1.3",
+                        "uri": "https://github.com/jboss-openshift/openshift-quickstarts"
+                    },
+                    "images": [
+                        {
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "jboss-datavirt63-driver-openshift:1.1",
+                                "namespace": "openshift"
+                            },
+                            "paths": [
+                                {
+                                    "destinationDir": "./datavirt/hibernate-webapp/extensions/extras",
+                                    "sourcePath": "/extensions/."
+                                }
+                            ]
+                        }
+                    ],
+                    "type": "Git"
+                },
+                "strategy": {
+                    "sourceStrategy": {
+                        "env": [
+                            {
+                                "name": "MAVEN_MIRROR_URL",
+                                "value": ""
+                            },
+                            {
+                                "name": "MAVEN_ARGS_APPEND",
+                                "value": ""
+                            },
+                            {
+                                "name": "GALLEON_PROVISION_LAYERS",
+                                "value": ""
+                            },
+                            {
+                                "name": "GALLEON_PROVISION_DEFAULT_FAT_SERVER",
+                                "value": "true"
+                            },
+                            {
+                                "name": "CUSTOM_INSTALL_DIRECTORIES",
+                                "value": "extensions/*"
+                            },
+                            {
+                                "name": "ARTIFACT_DIR",
+                                "value": ""
+                            }
+                        ],
+                        "forcePull": true,
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "jboss-eap73-openjdk11-openshift:7.3",
+                            "namespace": "openshift"
+                        },
+                        "incremental": true
+                    },
+                    "type": "Source"
+                },
+                "triggers": [
+                    {
+                        "github": {
+                            "secret": "gGTDk1Ty"
+                        },
+                        "type": "GitHub"
+                    },
+                    {
+                        "generic": {
+                            "secret": "kV6EGlEv"
+                        },
+                        "type": "Generic"
+                    },
+                    {
+                        "imageChange": {},
+                        "type": "ImageChange"
+                    },
+                    {
+                        "imageChange": {
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "jboss-datavirt63-driver-openshift:1.1",
+                                "namespace": "openshift"
+                            }
+                        },
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "eap-app:latest"
+                    }
+                },
+                "source": {
+                    "dockerfile": "FROM jboss-eap73-openjdk11-runtime-openshift:7.3\nCOPY /server $JBOSS_HOME\nUSER root\nRUN chown -R jboss:root $JBOSS_HOME \u0026\u0026 chmod -R ug+rwX $JBOSS_HOME\nUSER jboss\nCMD $JBOSS_HOME/bin/openshift-launch.sh",
+                    "images": [
+                        {
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "eap-app-build-artifacts:latest"
+                            },
+                            "paths": [
+                                {
+                                    "destinationDir": ".",
+                                    "sourcePath": "/s2i-output/server/"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "strategy": {
+                    "dockerStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "jboss-eap73-openjdk11-runtime-openshift:7.3",
+                            "namespace": "openshift"
+                        },
+                        "imageOptimizationPolicy": "SkipLayers"
+                    },
+                    "type": "Docker"
+                },
+                "triggers": [
+                    {
+                        "imageChange": {
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "eap-app-build-artifacts:latest"
+                            }
+                        },
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "apps.openshift.io/v1",
+            "kind": "DeploymentConfig",
+            "metadata": {
+                "labels": {
+                    "application": "eap-app",
+                    "template": "eap73-openjdk11-third-party-db-s2i",
+                    "xpaas": "7.3"
+                },
+                "name": "eap-app"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "deploymentConfig": "eap-app"
+                },
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "application": "eap-app",
+                            "deploymentConfig": "eap-app"
+                        },
+                        "name": "eap-app"
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [
+                                    {
+                                        "name": "JGROUPS_PING_PROTOCOL",
+                                        "value": "dns.DNS_PING"
+                                    },
+                                    {
+                                        "name": "OPENSHIFT_DNS_PING_SERVICE_NAME",
+                                        "value": "eap-app-ping"
+                                    },
+                                    {
+                                        "name": "OPENSHIFT_DNS_PING_SERVICE_PORT",
+                                        "value": "8888"
+                                    },
+                                    {
+                                        "name": "ENV_FILES",
+                                        "value": "/etc/eap-environment/*"
+                                    },
+                                    {
+                                        "name": "HTTPS_KEYSTORE_DIR",
+                                        "value": "/etc/eap-secret-volume"
+                                    },
+                                    {
+                                        "name": "HTTPS_KEYSTORE",
+                                        "value": "keystore.jks"
+                                    },
+                                    {
+                                        "name": "HTTPS_KEYSTORE_TYPE",
+                                        "value": ""
+                                    },
+                                    {
+                                        "name": "HTTPS_NAME",
+                                        "value": "jboss"
+                                    },
+                                    {
+                                        "name": "HTTPS_PASSWORD",
+                                        "value": "mykeystorepass"
+                                    },
+                                    {
+                                        "name": "MQ_CLUSTER_PASSWORD",
+                                        "value": "wPxiirLD"
+                                    },
+                                    {
+                                        "name": "MQ_QUEUES",
+                                        "value": ""
+                                    },
+                                    {
+                                        "name": "MQ_TOPICS",
+                                        "value": ""
+                                    },
+                                    {
+                                        "name": "JGROUPS_ENCRYPT_SECRET",
+                                        "value": "eap-app-secret"
+                                    },
+                                    {
+                                        "name": "JGROUPS_ENCRYPT_KEYSTORE_DIR",
+                                        "value": "/etc/jgroups-encrypt-secret-volume"
+                                    },
+                                    {
+                                        "name": "JGROUPS_ENCRYPT_KEYSTORE",
+                                        "value": "jgroups.jceks"
+                                    },
+                                    {
+                                        "name": "JGROUPS_ENCRYPT_NAME",
+                                        "value": "secret-key"
+                                    },
+                                    {
+                                        "name": "JGROUPS_ENCRYPT_PASSWORD",
+                                        "value": "password"
+                                    },
+                                    {
+                                        "name": "JGROUPS_CLUSTER_PASSWORD",
+                                        "value": "fAcAkJy8"
+                                    },
+                                    {
+                                        "name": "AUTO_DEPLOY_EXPLODED",
+                                        "value": "false"
+                                    },
+                                    {
+                                        "name": "ENABLE_GENERATE_DEFAULT_DATASOURCE",
+                                        "value": "false"
+                                    }
+                                ],
+                                "image": "eap-app",
+                                "imagePullPolicy": "Always",
+                                "livenessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-c",
+                                            "/opt/eap/bin/livenessProbe.sh"
+                                        ]
+                                    },
+                                    "initialDelaySeconds": 60
+                                },
+                                "name": "eap-app",
+                                "ports": [
+                                    {
+                                        "containerPort": 8778,
+                                        "name": "jolokia",
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 8080,
+                                        "name": "http",
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 8443,
+                                        "name": "https",
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 8888,
+                                        "name": "ping",
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "readinessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "/bin/bash",
+                                            "-c",
+                                            "/opt/eap/bin/readinessProbe.sh"
+                                        ]
+                                    },
+                                    "initialDelaySeconds": 10
+                                },
+                                "resources": {
+                                    "limits": {
+                                        "memory": "1Gi"
+                                    }
+                                },
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/etc/eap-environment",
+                                        "name": "configuration",
+                                        "readOnly": true
+                                    },
+                                    {
+                                        "mountPath": "/etc/eap-secret-volume",
+                                        "name": "eap-keystore-volume",
+                                        "readOnly": true
+                                    },
+                                    {
+                                        "mountPath": "/etc/jgroups-encrypt-secret-volume",
+                                        "name": "eap-jgroups-keystore-volume",
+                                        "readOnly": true
+                                    }
+                                ]
+                            }
+                        ],
+                        "terminationGracePeriodSeconds": 75,
+                        "volumes": [
+                            {
+                                "name": "configuration",
+                                "secret": {
+                                    "secretName": "eap-app-config"
+                                }
+                            },
+                            {
+                                "name": "eap-keystore-volume",
+                                "secret": {
+                                    "secretName": "eap-app-secret"
+                                }
+                            },
+                            {
+                                "name": "eap-jgroups-keystore-volume",
+                                "secret": {
+                                    "secretName": "eap-app-secret"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "triggers": [
+                    {
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "eap-app"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "eap-app:latest"
+                            }
+                        },
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.5">
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\controller\MemberController.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\data\MemberListProducer.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\data\MemberRepository.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\model\Member.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\service\MemberRegistration.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\java\org\jboss\as\quickstart\hibernate\util\Resources.java">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\resources\layers\standalone\postgresql-datasource\layer-spec.xml">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\resources\layers\standalone\postgresql-driver\layer-spec.xml">
+</file>
+<file name="D:\Repos\github\diffthink\learning-crc\src\main\resources\META-INF\persistence.xml">
+</file>
+</checkstyle>
