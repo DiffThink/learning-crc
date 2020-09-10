@@ -11,13 +11,41 @@ image::https://badges.gitter.im/DiffThink-ApplicationServices-East-MM-CSO-NA/ETA
 
 = Introduction
 
-Identifying several useful ways to install, configure and develop with PostgreSQL
+**JBoss Hibernate 7.3.x - DataSource (JNDI|JPA) Ninja | OpenShift**
+
+We are working towards creating an example demonstration JNDI|JPA|Hibernate DataSource configuration support. The common challenge to switch DataSources | Drivers in OpenShift examples.
+
+Any advice or guidance is welcome, since I'm a JBoss EAP & OpenShift newbie.
+
+We are currently working through a few obstacles in the following:
+
+. new-build | start-build
+. s2i artifact
+. runtime artifact
+. manual configuration
+. editing templates
+
+To switch between the following
+
+- In-Memory
+- SQL Server for Linus
+- PostgreSQL
+- Cockroach
 
 = Background
 
+**Our Story: electrical training ALLIANCE**
+
+It all started with https://www.electricaltrainingalliance.org/[electrical training Alliance (ETA)], so we want to give a big shoutout to them. Thank you, ETA, for showing us the light.  Yes, "https://www.merriam-webster.com/dictionary/a%2Fthe%20squeaky%20wheel%20gets%20the%20grease%2Foilthe [squeaky will does get the grease]."
+
+
 = Theory
 
-The documentation, instructions and demos not developed for all audiences. The Professional (SMB) and Commercial (Mid-Market) developer community User eXperience is not currently addressed with the current Customer Portal experience.
+To create frictionless documentation, instructions, and demonstrative examples for all audiences. The Professional (SMB) and Commercial (Mid-Market) developer community User eXperience (UX) concerns are not currently addressed in our Customer Portal.
+
+_**Frictionless**_ is the key through _practicing_ the _**OPEN Source** way_. 
+
+Audienace 
 
 == Resource List
 
@@ -52,6 +80,9 @@ Sources
 - https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure_the_postgresql_database_for_use_with_the_quickstarts[Configure the PostgreSQL Database]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#add-the-postgresql-module-to-the-jboss-eap[Add the PostgreSQL Module to the JBoss EAP]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure-the-postgresql-driver-in-the-jboss-eap-server[Configure the PostgreSQL Driver in the JBoss EAP Server]
+
+
+- https://access.redhat.com/articles/2026253[Red Hat JBoss Enterprise Application Platform (EAP) 7 Supported Configurations]
 
 Downloads
 
