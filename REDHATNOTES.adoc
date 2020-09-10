@@ -168,10 +168,33 @@ Some of the quickstarts that demonstrate transactions require that you install a
 
 = Workplan
 
+Journal every step of the way to document for Application Service BU, Marketing & Technology Operations, and related teams the challenges of engaging with Professional and Commerical Open Source contributors.
+
+The current steps are documented in the
+
+- Red Hat Notes
+- https://github.com/DiffThink/learning-crc/blob/feature/osd-eap-hibernate/oc%20new-project%20eap-demo.ps1[OpenShift New JBoss EAP Hibernate|JNDI|JPA Demonstration Journal]
+
+
 = Results
 
 = Discussion
 
 = Conclusion
+
+== Gratuity
+
+**Professional & Commerical Open Source Community Influencers**
+
+- Stephen Boyd, electrical training ALLIANCE (ETA)
+- Han Chung, American Bible Society (ABS) 
+
+**Red Hatters**
+
+- Daniel Oh
+- Eric Deandrea
+- Paul Vergilis
+- Red Hat Application Development CoP 
+
 
 = Recommendations
