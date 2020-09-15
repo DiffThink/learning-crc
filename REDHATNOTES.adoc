@@ -45,7 +45,7 @@ To create frictionless documentation, instructions, and demonstrative examples f
 
 _**Frictionless**_ is the key through _practicing_ the _**OPEN Source** way_. 
 
-Audienace 
+Audience 
 
 == Resource List
 
@@ -66,7 +66,7 @@ Registry Catalog
 
 == Materials and apparatus
 
-=== Documentaton
+=== Documentation
 
 2.4. Import the Latest JBoss EAP for OpenShift Imagestreams and Templates
 
@@ -78,7 +78,7 @@ Registry Catalog
 
 _Need vetting_
 
-- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack[Wildfly Datasource Galleon Pack]
+- https://github.com/wildfly-extras/wildfly-datasources-galleon-pack[Wildfly DataSource Galleon Pack]
 - https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure_the_postgresql_database_for_use_with_the_quickstarts[Configure the PostgreSQL Database]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#add-the-postgresql-module-to-the-jboss-eap[Add the PostgreSQL Module to the JBoss EAP]
 * https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/CONFIGURE_POSTGRESQL_JBOSS_EAP.adoc#configure-the-postgresql-driver-in-the-jboss-eap-server[Configure the PostgreSQL Driver in the JBoss EAP Server]
@@ -87,7 +87,7 @@ _Need vetting_
 
 - https://access.redhat.com/articles/2026253[Red Hat JBoss Enterprise Application Platform (EAP) 7 Supported Configurations]
 - https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/7.3.0_release_notes/index#supported_configurations[7.3.0 Release Notes |Chapter 2. Supported Configurations]
-- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#creating-a-configmap-from-standalone-xml-file_default[Getting Started With Jboss Eap For Openshift Container Platform|8.3.3. Creating a ConfigMap from a standalone.xml File]
+- https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#creating-a-configmap-from-standalone-xml-file_default[Getting Started With Jboss Eap For OpenShift Container Platform|8.3.3. Creating a ConfigMap from a standalone.xml File]
 
 
 **Downloads**
@@ -102,7 +102,7 @@ Identifying the correct templates for EAP ^7.3, PostgreSQL ^12.x and OpenShift ^
 
 .\oc new-project eap-demo.ps1[Installed the following templates for EAP 7.3]
 
-=== JBOSS EAP Deployment
+=== JBoss EAP Deployment
 
 [eap73-openjdk11-example]
 ====
@@ -117,7 +117,7 @@ oc new-app --template=eap73-openjdk11-third-party-db-s2i.json  `
 ====
 
 . --template
-. -p, --param=[] (Parmeters)
+. -p, --param=[] (Parameters)
 * IMAGE_STREAM_NAMESPACE
 * SOURCE_REPOSITORY_URL
 * SOURCE_REPOSITORY_REF
@@ -126,14 +126,14 @@ oc new-app --template=eap73-openjdk11-third-party-db-s2i.json  `
 . -e, --env=[]
 . -l, --labels=''
 
-==== Source Repoistory
+==== Source Repository
 
-Make sure useing the correct tag or release.
+Make sure using the correct tag or release.
 
 
 ==== Galleon Provision
 
-Used standalone for my testing, yet should be able to use `jpa` or `cloud-profile` (recomended)
+Used standalone for my testing, yet should be able to use `jpa` or `cloud-profile` (recommended)
 
 
 ## PostgreSQL DataSource & Driver
@@ -172,7 +172,7 @@ Some of the quickstarts that demonstrate transactions require that you install a
 
 = Procedure
 
-Journal every step of the way to document for Application Service BU, Marketing & Technology Operations, and related teams the challenges of engaging with Professional and Commerical Open Source contributors.
+Journal every step of the way to document for Application Service BU, Marketing & Technology Operations, and related teams the challenges of engaging with Professional and Commercial Open Source contributors.
 
 The current steps are documented in the
 
@@ -214,7 +214,7 @@ Initial learn to all approaches using the OC | ODO client tools, and then follow
 
 == Gratuity
 
-**Professional & Commerical Open Source Community Influencers**
+**Professional & Commercial Open Source Community Influencers**
 
 - Stephen Boyd, electrical training ALLIANCE (ETA)
 - Han Chung, American Bible Society (ABS) 
@@ -228,3 +228,11 @@ Initial learn to all approaches using the OC | ODO client tools, and then follow
 
 
 = Recommendations
+
+
+= Sidebars
+
+Galleon Resources
+- https://github.com/jfdenise/galleon-openshift/releases[galleon and postgre FP]
+- https://github.com/DiffThink/galleon-demo/commit/4980eefe320fbb37bb854a8ebe660ba097cd91b4[Initial Commit]
+- https://github.com/DiffThink/galleon-demo/commit/4980eefe320fbb37bb854a8ebe660ba097cd91b4/test/test-app-postgres/src/main/resources/META-INF/persistence.xml[/src/main/resources/META-INF/persistence.xml]
