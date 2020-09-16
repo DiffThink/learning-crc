@@ -14,13 +14,6 @@ docker login quay.io
 docker login registry.redhat.io 
 #endregion
 
-#region OpenShift Variables
-
-$OC_CURRENT_CLUSTER_USER = $(oc whoami)
-$OC_CURRENT_CLUSTER_TOKEN = $(oc whoami -t)
-$OC_CURRENT_CLUSTER_CONTEXT = $(oc config current-context)
-#endregion
-
 #region Local Environment Variables
 
 $Env:PATH = "C:\Users\Developer\.crc\bin\oc;$Env:PATH"
@@ -29,6 +22,13 @@ $EAP_HOME   = "D:\volume\sandbox\jboss-eap-7.3\"
 $EAP7_HOME  = "D:\volume\sandbox\jboss-eap-7.3\bin\"
 $JBOSS_HOME  = "D:\volume\sandbox\jboss-eap-7.3\"
 $OC_EAP_GUID = (New-Guid).ToString().Substring(0,8)
+#endregion
+
+#region OpenShift Variables
+
+$OC_CURRENT_CLUSTER_USER = $(oc whoami)
+$OC_CURRENT_CLUSTER_TOKEN = $(oc whoami -t)
+$OC_CURRENT_CLUSTER_CONTEXT = $(oc config current-context)
 #endregion
 
 $OC_EAP_PROJECT = "dev-eap-$($OC_EAP_GUID)"    # Dirty Random Generator
@@ -49,12 +49,14 @@ oc create -f "$($OC_SECRET_PATH)12666202_idm-odo-sa-secret.yaml" -n $OC_EAP_PROJ
 oc create -f "$($OC_SECRET_PATH)12666202_parris-redhat-com-secret.yaml" -n $OC_EAP_PROJECT
 
 # project development certificates SSL/TLS
+
 oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/eap-app-secret.json
 oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/eap7-app-secret.json
 oc create -n $OC_EAP_PROJECT -f https://raw.githubusercontent.com/jboss-openshift/application-templates/master/secrets/sso-app-secret.json
 #endregion
 
 #region Add missing templates jboss-eap-7-openshift-image/eap73-openjdk11
+
 oc replace --force -n $OC_EAP_PROJECT -f "$($JBOSS_EAP_IMAGE_URL)eap73-openjdk11-image-stream.json"
 oc replace --force -n $OC_EAP_PROJECT -f "$($JBOSS_EAP_IMAGE_URL)eap73-openjdk11-amq-persistent-s2i.json"
 oc replace --force -n $OC_EAP_PROJECT -f "$($JBOSS_EAP_IMAGE_URL)eap73-openjdk11-amq-s2i.json"
