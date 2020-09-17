@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.redhat.east</groupId>
   <artifactId>quarkus-hibernate-sql-maven</artifactId>
@@ -164,4 +165,16 @@
       </properties>
     </profile>
   </profiles>
+  <repositories>
+   <!--  
+     Added reference to Red Hat's Repo, and you can find more information
+     JBoss Enterprise Maven Repository
+     https://access.redhat.com/maven-repository
+  -->
+    <repository>
+      <id>redhat-ea-all-repository-01</id>
+      <name>Red Hat Early-access (all)</name>
+      <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
+    </repository>
+  </repositories>
 </project>
