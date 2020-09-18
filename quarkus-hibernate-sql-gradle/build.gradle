@@ -9,18 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.quarkus:quarkus-jdbc-postgresql'
-    implementation 'io.quarkus:quarkus-jdbc-mysql'
-    implementation 'io.quarkus:quarkus-liquibase'
-    implementation 'io.quarkus:quarkus-agroal'
-    implementation 'io.quarkus:quarkus-config-yaml'
-    implementation 'io.quarkus:quarkus-jdbc-mariadb'
-    implementation 'io.quarkus:quarkus-container-image-s2i'
-    implementation 'io.quarkus:quarkus-jdbc-mssql'
-    implementation 'io.quarkus:quarkus-hibernate-validator'
-    implementation 'io.quarkus:quarkus-jdbc-h2'
-    implementation 'io.quarkus:quarkus-hibernate-orm'
-    implementation 'io.quarkus:quarkus-openshift'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy'
 
@@ -28,7 +16,7 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
 }
 
-group 'dev.redhat.east'
+group 'dev.redhat'
 version '1.0.0-SNAPSHOT'
 
 compileJava {
@@ -43,4 +31,8 @@ compileTestJava {
 java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
 }
