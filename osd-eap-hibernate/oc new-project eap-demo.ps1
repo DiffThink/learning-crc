@@ -25,6 +25,7 @@ $OC_EAP_GUID = (New-Guid).ToString().Substring(0,8)
 #endregion
 
 #region OpenShift Variables
+oc login --token=tfAFoYfztsZngSdmG4SN4lwIIw0JbKiXDd0F2UPj69I --server=https://api.shared-na4.na4.openshift.opentlc.com:6443
 
 $OC_CURRENT_CLUSTER_USER = $(oc whoami)
 $OC_CURRENT_CLUSTER_TOKEN = $(oc whoami -t)
