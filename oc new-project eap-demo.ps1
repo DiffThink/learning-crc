@@ -16,11 +16,15 @@ docker login registry.redhat.io
 
 #region Local Environment Variables
 
-$Env:PATH = "C:\Users\Developer\.crc\bin\oc;$Env:PATH"
+$OC_OC_PATH = "C:\Users\Developer\.crc\bin\oc\;"
+$DB_POSTGRESQL_Path = "D:\Developer\scoop\apps\PostgreSQL\current\bin\;"
+
+$Env:PATH ="$OC_OC_PATH$DB_POSTGRESQL_Path$Env:Path"
+
 $CRC_PATH = "D:\Developer\CRC\"
-$EAP_HOME   = "D:\volume\sandbox\jboss-eap-7.3\"
-$EAP7_HOME  = "D:\volume\sandbox\jboss-eap-7.3\bin\"
-$JBOSS_HOME  = "D:\volume\sandbox\jboss-eap-7.3\"
+$EAP_HOME   = "D:\volume\sandbox\jboss\"
+$EAP7_HOME  = "D:\volume\sandbox\jboss\bin\"
+$JBOSS_HOME  = "D:\volume\sandbox\jboss\"
 $OC_EAP_GUID = (New-Guid).ToString().Substring(0,8)
 #endregion
 
